@@ -20,10 +20,11 @@ public class Menu {
         System.out.println("1. Show All Problems");
         System.out.println("2. Search by Difficulty");
         System.out.println("3. Search by Algorithm");
-        System.out.println("4. Statistics");
-        System.out.println("5. Topic Statistics");
-        System.out.println("6. Export CSV");
-        System.out.println("7. Exit");
+        System.out.println("4. Search by Topic");
+        System.out.println("5. Statistics");
+        System.out.println("6. Topic Statistics");
+        System.out.println("7. Export CSV");
+        System.out.println("8. Exit");
         System.out.println();
     }
 
@@ -52,12 +53,16 @@ public class Menu {
                         problemService.searchByAlgorithm(algorithm);
                         break;
                     case 4:
+                        System.out.println("Enter Topic:");
+                        String topic = sc.nextLine();
+                        problemService.searchByTopic(topic);
+                    case 5:
                         problemService.showStatistics();
                         break;
-                    case 5:
+                    case 6:
                         problemService.showTopicStatistics();
                         break;
-                    case 6:
+                    case 7:
                         System.out.print("Enter the file name for the report (leave blank to use 'DSA_report.csv'): ");
                         String fileName = sc.nextLine().trim();
 
@@ -71,7 +76,7 @@ public class Menu {
 
                         System.out.println("CSV exported successfully");
                         break;
-                    case 7:
+                    case 8:
                         System.out.println("Exiting...");
                         return;
                     default:

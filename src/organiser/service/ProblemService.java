@@ -39,7 +39,14 @@ public class ProblemService {
         System.out.println("Hard: " + hard);
     }
     public void searchByTopic(String topic){
-
+        for (int i = 0; i < problems.size(); i++) {
+            Problem problem = problems.get(i);
+            if (problem.getTopic() != null && problem.getDifficulty().toLowerCase().contains(topic)) {
+                System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problem.getFileName(), problem.getDifficulty(), problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
+            }
+        }
+        System.out.println("===========================================================================================================");
+        System.out.println();
     }
 
     public void searchByDifficulty(String difficulty) {
@@ -52,8 +59,6 @@ public class ProblemService {
                 System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problem.getFileName(), problem.getDifficulty(), problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
             }
         }
-        System.out.println("===========================================================================================================");
-        getSize();
         System.out.println("===========================================================================================================");
         System.out.println();
     }
