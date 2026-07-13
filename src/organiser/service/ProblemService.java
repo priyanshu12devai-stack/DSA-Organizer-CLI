@@ -38,6 +38,9 @@ public class ProblemService {
         System.out.println("Medium: " + medium);
         System.out.println("Hard: " + hard);
     }
+    public void searchByTopic(String topic){
+
+    }
 
     public void searchByDifficulty(String difficulty) {
         System.out.println("===========================================================================================================");
