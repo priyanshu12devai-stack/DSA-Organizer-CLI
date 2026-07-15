@@ -1,12 +1,12 @@
 package organiser.service;
-
+import java.util.function.Predicate;
 import organiser.model.Problem;
 
 import java.util.*;
 
 public class ProblemService {
     private final List<Problem> problems;
-
+    private final Scanner sc = new Scanner(System.in);
     public ProblemService(List<Problem> problems) {
         this.problems = problems;//It doesn't create the list anymore. it recieves one. this is called constructor injection
     }
@@ -38,48 +38,121 @@ public class ProblemService {
         System.out.println("Medium: " + medium);
         System.out.println("Hard: " + hard);
     }
-    public void searchByTopic(String topic){
-        for (int i = 0; i < problems.size(); i++) {
-            Problem problem = problems.get(i);
-            if (problem.getTopic() != null && problem.getDifficulty().toLowerCase().contains(topic)) {
-                System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problem.getFileName(), problem.getDifficulty(), problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
+//    public void searchByTopic(String topic){
+//        System.out.println("===========================================================================================================");
+//        System.out.printf("%-5s %-20s %-12s %-12s %-20s %-20s%n", "No.", "File Name", "Difficulty", "Topic", "Algorithm", "Problem");
+//        System.out.println("===========================================================================================================");
+//        for (int i = 0; i < problems.size(); i++) {
+//            Problem problem = problems.get(i);
+//            if (problem.getTopic()!=null && problem.getTopic().toLowerCase().contains(topic.toLowerCase())) {
+//                System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problem.getFileName(), problem.getDifficulty(), problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
+//            }
+//        }
+//        System.out.println("===========================================================================================================");
+//        System.out.println();
+//    }
+//
+//    public void searchByDifficulty(String difficulty) {
+//        System.out.println("===========================================================================================================");
+//        System.out.printf("%-5s %-20s %-12s %-12s %-20s %-20s%n", "No.", "File Name", "Difficulty", "Topic", "Algorithm", "Problem");
+//        System.out.println("===========================================================================================================");
+//        for (int i = 0; i < problems.size(); i++) {
+//            Problem problem = problems.get(i);
+//            if (problem.getDifficulty() != null && problem.getDifficulty().toLowerCase().contains(difficulty)) {
+//                System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problem.getFileName(), problem.getDifficulty(), problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
+//            }
+//        }
+//        System.out.println("===========================================================================================================");
+//        System.out.println();
+//    }
+//
+//
+//    public void searchByAlgorithm(String Algorithm) {
+//        System.out.println("===========================================================================================================");
+//        System.out.printf("%-5s %-20s %-12s %-12s %-20s %-20s%n", "No.", "File Name", "Difficulty", "Topic", "Algorithm", "Problem");
+//        System.out.println("===========================================================================================================");
+//        for (int i = 0; i < problems.size(); i++) {
+//            Problem problem = problems.get(i);
+//            if (problem.getAlgorithm() != null && problem.getAlgorithm().toLowerCase().contains(Algorithm)) {
+//                System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problem.getFileName(), problem.getDifficulty(), problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
+//            }
+//        }
+//        System.out.println("===========================================================================================================");
+//        getSize();
+//        System.out.println("===========================================================================================================");
+//        System.out.println();
+//    }
+
+    public void search() {
+        while (true) {
+            System.out.println("=========== SEARCH ===========");
+            System.out.println("1. Search by Topic");
+            System.out.println("2. Search by Difficulty");
+            System.out.println("3. Search by Algorithm");
+            System.out.println("4. Seach by Problem Name");
+            System.out.println("5. Back");
+            System.out.println("==============================");
+            try {
+                int choice = Integer.parseInt(sc.nextLine());
+                switch (choice) {
+                    case 1:
+                        System.out.println("Enter Topic:");
+                        String topic = sc.nextLine().toLowerCase();
+                        executeSearch(p -> p.getTopic() != null && p.getTopic().toLowerCase().contains(topic), false);
+                        break;
+                    case 2:
+                        System.out.println("Enter Difficulty:");
+                        String difficulty = sc.nextLine().toLowerCase();
+                        executeSearch(p -> p.getDifficulty() != null && p.getDifficulty().toLowerCase().contains(difficulty), false);
+                        break;
+                    case 3:
+                        System.out.println("Enter Algorithm:");
+                        String algorithm = sc.nextLine().toLowerCase();
+                        // Notice 'true' is passed here to trigger getSize() just like your original code
+                        executeSearch(p -> p.getAlgorithm() != null && p.getAlgorithm().toLowerCase().contains(algorithm), true);
+                        break;
+                    case 4:
+                        System.out.println("Enter Problem Name:");
+                        String name= sc.nextLine().toLowerCase();
+                        executeSearch(p -> p.getProblemName()!=null && p.getProblemName().toLowerCase().contains(name), false);
+                        break;
+                    case 5:
+                        return;
+                    default:
+                        System.out.println("Invalid choice. Enter again!");
+                        break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid Input! Please enter a number.");
             }
         }
-        System.out.println("===========================================================================================================");
-        System.out.println();
     }
 
-    public void searchByDifficulty(String difficulty) {
+    // 2. The combined helper method that does the actual printing
+    private void executeSearch(Predicate<Problem> condition, boolean printSize) {
         System.out.println("===========================================================================================================");
         System.out.printf("%-5s %-20s %-12s %-12s %-20s %-20s%n", "No.", "File Name", "Difficulty", "Topic", "Algorithm", "Problem");
         System.out.println("===========================================================================================================");
+
         for (int i = 0; i < problems.size(); i++) {
             Problem problem = problems.get(i);
-            if (problem.getDifficulty() != null && problem.getDifficulty().toLowerCase().contains(difficulty)) {
-                System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problem.getFileName(), problem.getDifficulty(), problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
+            // This tests the problem against whichever rule was passed from the switch statement
+            if (condition.test(problem)) {
+                System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n",
+                        i + 1, problem.getFileName(), problem.getDifficulty(),
+                        problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
             }
         }
-        System.out.println("===========================================================================================================");
-        System.out.println();
-    }
 
+        System.out.println("===========================================================================================================");
 
-    public void searchByAlgorithm(String Algorithm) {
-        System.out.println("===========================================================================================================");
-        System.out.printf("%-5s %-20s %-12s %-12s %-20s %-20s%n", "No.", "File Name", "Difficulty", "Topic", "Algorithm", "Problem");
-        System.out.println("===========================================================================================================");
-        for (int i = 0; i < problems.size(); i++) {
-            Problem problem = problems.get(i);
-            if (problem.getAlgorithm() != null && problem.getAlgorithm().toLowerCase().contains(Algorithm)) {
-                System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problem.getFileName(), problem.getDifficulty(), problem.getTopic(), problem.getAlgorithm(), problem.getProblemName());
-            }
+        // Handles the getSize() logic you originally had only in searchByAlgorithm
+        if (printSize) {
+            getSize();
+            System.out.println("===========================================================================================================");
         }
-        System.out.println("===========================================================================================================");
-        getSize();
-        System.out.println("===========================================================================================================");
         System.out.println();
     }
-
 
     public void showTopicStatistics() {
         HashMap<String, Integer> topiccount = new HashMap<>();

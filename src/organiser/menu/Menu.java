@@ -18,13 +18,11 @@ public class Menu {
         System.out.println("========= DSA ORGANIZER =========");
         System.out.println();
         System.out.println("1. Show All Problems");
-        System.out.println("2. Search by Difficulty");
-        System.out.println("3. Search by Algorithm");
-        System.out.println("4. Search by Topic");
-        System.out.println("5. Statistics");
-        System.out.println("6. Topic Statistics");
-        System.out.println("7. Export CSV");
-        System.out.println("8. Exit");
+        System.out.println("2. Search");
+        System.out.println("3. Statistics");
+        System.out.println("4. Topic Statistics");
+        System.out.println("5. Export CSV");
+        System.out.println("6. Exit");
         System.out.println();
     }
 
@@ -42,27 +40,15 @@ public class Menu {
                         problemService.printAlldata();
                         break;
                     case 2:
-                        System.out.println("Enter Difficulty :");
-                        String difficulty = sc.nextLine();
-                        problemService.searchByDifficulty(difficulty);
-
+                        problemService.search();
                         break;
                     case 3:
-                        System.out.println("Enter Algorithm: ");
-                        String algorithm = sc.nextLine();
-                        problemService.searchByAlgorithm(algorithm);
-                        break;
-                    case 4:
-                        System.out.println("Enter Topic:");
-                        String topic = sc.nextLine();
-                        problemService.searchByTopic(topic);
-                    case 5:
                         problemService.showStatistics();
                         break;
-                    case 6:
+                    case 4:
                         problemService.showTopicStatistics();
                         break;
-                    case 7:
+                    case 5:
                         System.out.print("Enter the file name for the report (leave blank to use 'DSA_report.csv'): ");
                         String fileName = sc.nextLine().trim();
 
@@ -76,7 +62,7 @@ public class Menu {
 
                         System.out.println("CSV exported successfully");
                         break;
-                    case 8:
+                    case 6:
                         System.out.println("Exiting...");
                         return;
                     default:
