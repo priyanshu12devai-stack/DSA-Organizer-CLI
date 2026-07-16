@@ -1,6 +1,6 @@
 /*
 @Problem =Sort 0's ,1's , 2's
-@Algorithm = Dutch national flag algorithm
+@Algorithm = Dutch algorithm
 @Topic = array
 @Difficulty = Medium
 @Problem_num = 12

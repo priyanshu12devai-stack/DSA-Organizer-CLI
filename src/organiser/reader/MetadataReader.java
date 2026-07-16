@@ -33,7 +33,7 @@ public class MetadataReader {
                             problem.setDifficulty(value);
                             break;
                         case "@Problem_num":
-                            problem.setProb_num(value);
+                            problem.setProblemNumber(value);
                             break;
                         case "@Link":
                             break;

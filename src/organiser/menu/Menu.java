@@ -19,10 +19,11 @@ public class Menu {
         System.out.println();
         System.out.println("1. Show All Problems");
         System.out.println("2. Search");
-        System.out.println("3. Statistics");
-        System.out.println("4. Topic Statistics");
-        System.out.println("5. Export CSV");
-        System.out.println("6. Exit");
+        System.out.println("3. Sort");
+        System.out.println("4. Statistics");
+        System.out.println("5. Topic Statistics");
+        System.out.println("6. Export CSV");
+        System.out.println("7. Exit");
         System.out.println();
     }
 
@@ -37,18 +38,20 @@ public class Menu {
 
                 switch (choice) {
                     case 1:
-                        problemService.printAlldata();
+                        problemService.printAlldata(problemService.getAllProblems());
                         break;
                     case 2:
                         problemService.search();
                         break;
                     case 3:
+                        problemService.sort();
+                    case 4:
                         problemService.showStatistics();
                         break;
-                    case 4:
+                    case 5:
                         problemService.showTopicStatistics();
                         break;
-                    case 5:
+                    case 6:
                         System.out.print("Enter the file name for the report (leave blank to use 'DSA_report.csv'): ");
                         String fileName = sc.nextLine().trim();
 
@@ -62,7 +65,7 @@ public class Menu {
 
                         System.out.println("CSV exported successfully");
                         break;
-                    case 6:
+                    case 7:
                         System.out.println("Exiting...");
                         return;
                     default:

@@ -6,19 +6,19 @@ public class Problem {
     private String topic;
     private String difficulty;
     private String fileName;
-    private String prob_num;
+    private String problemNumber;
 
     public Problem() {
 
     }
 
-    public Problem(String problemName, String algorithm, String topic, String difficulty, String fileName, String prob_num) {
+    public Problem(String problemName, String algorithm, String topic, String difficulty, String fileName, String problemNumber) {
         this.problemName = problemName;
         this.algorithm = algorithm;
         this.topic = topic;
         this.difficulty = difficulty;
         this.fileName = fileName;
-        this.prob_num = prob_num;
+        this.problemNumber = problemNumber;
 
     }
 
@@ -43,8 +43,8 @@ public class Problem {
         return fileName;
     }
 
-    public String getProb_num() {
-        return prob_num;
+    public String getProblemNumber() {
+        return problemNumber;
     }
 
     public void setProblemName(String problemName) {
@@ -67,12 +67,12 @@ public class Problem {
         this.fileName = fileName;
     }
 
-    public void setProb_num(String prob_num) {
-        this.prob_num = prob_num;
+    public void setProblemNumber(String problemNumber) {
+        this.problemNumber = problemNumber;
     }
 
     @Override
     public String toString() {
-        return "Problem{" + "fileName='" + fileName + '\'' + ", problemName='" + problemName + '\'' + ", algorithm='" + algorithm + '\'' + ", topic='" + topic + '\'' + ", difficulty='" + difficulty + '\'' + '}';
+        return "Problem{" + "fileName='" + fileName + '\'' + ", problemName='" + problemName + '\'' + ", algorithm='" + algorithm + '\'' + ", topic='" + topic + '\'' + ", difficulty='" + difficulty + '\'' + ", Number='" + problemNumber + '\''+'}';
     }
 }

@@ -12,9 +12,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         FolderScanner scanner = new FolderScanner();
 
-        ArrayList<Problem> problems = scanner.scanFolder();
 
-        ProblemService service = new ProblemService(problems);
+
+        ProblemService service = new ProblemService(scanner.scanFolder());
 
 //        service.ShowStatastics();
 

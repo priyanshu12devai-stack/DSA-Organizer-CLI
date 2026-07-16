@@ -89,7 +89,7 @@ public class ProblemService {
             System.out.println("1. Search by Topic");
             System.out.println("2. Search by Difficulty");
             System.out.println("3. Search by Algorithm");
-            System.out.println("4. Seach by Problem Name");
+            System.out.println("4. Search by Problem Name");
             System.out.println("5. Back");
             System.out.println("==============================");
             try {
@@ -154,6 +154,62 @@ public class ProblemService {
         System.out.println();
     }
 
+
+
+    public void sort() {
+        while (true) {
+            System.out.println("=========== SORT ===========");
+            System.out.println("1. Sort by Topic");
+            System.out.println("2. Sort by Difficulty");
+            System.out.println("3. Sort by Algorithm");
+            System.out.println("4. Sort by Problem Name");
+            System.out.println("5. Sort by Problem Number");
+            System.out.println("6. Back");
+            System.out.println("==============================");
+            try {
+                int choice = Integer.parseInt(sc.nextLine());
+
+                switch (choice) {
+                    case 1:
+                        executeSort(Comparator.comparing(Problem::getTopic,Comparator.nullsLast(Comparator.naturalOrder())));
+                        break;
+
+                    case 2:
+                        executeSort(Comparator.comparing(Problem::getDifficulty,Comparator.nullsLast(Comparator.naturalOrder())));
+                        break;
+
+                    case 3:
+                        executeSort(Comparator.comparing(Problem::getAlgorithm,Comparator.nullsLast(Comparator.naturalOrder())));
+                        break;
+
+                    case 4:
+                        executeSort(Comparator.comparing(Problem::getProblemName,Comparator.nullsLast(Comparator.naturalOrder())));
+                        break;
+
+                    case 5:
+                        executeSort(Comparator.comparing(Problem::getProblemNumber,Comparator.nullsLast(Comparator.naturalOrder())));
+                        break;
+                    case 6:
+                        return;
+
+                    default:
+                        System.out.println("Invalid choice. Enter again!");
+                }
+
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid Input! Please enter a number.");
+            }
+        }
+    }
+
+    public void executeSort(Comparator<Problem> comparator){
+        ArrayList<Problem> sortedList = new ArrayList<>(problems);
+        sortedList.sort(comparator);
+        printAlldata(sortedList);
+    }
+
+
+
     public void showTopicStatistics() {
         HashMap<String, Integer> topiccount = new HashMap<>();
         for (Problem problems : problems) {
@@ -185,13 +241,13 @@ public class ProblemService {
 
     }
 
-    public void printAlldata() {
+    public void printAlldata(List<Problem> list) {
         System.out.println("===========================================================================================================");
         System.out.printf("%-5s %-20s %-12s %-12s %-20s %-20s%n", "No.", "File Name", "Difficulty", "Topic", "Algorithm", "Problem");
         System.out.println("===========================================================================================================");
-        for (int i = 0; i < problems.size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
 
-            System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i + 1, problems.get(i).getFileName(), problems.get(i).getDifficulty(), problems.get(i).getTopic(), problems.get(i).getAlgorithm(), problems.get(i).getProblemName());
+            System.out.printf("%-5d %-20s %-12s %-12s %-20s %-20s%n", i+1, list.get(i).getFileName(), list.get(i).getDifficulty(), list.get(i).getTopic(), list.get(i).getAlgorithm(), list.get(i).getProblemName());
         }
         System.out.println("===========================================================================================================");
         getSize();
